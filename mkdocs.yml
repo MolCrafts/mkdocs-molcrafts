@@ -2,4 +2,4 @@ site_name: My Docs
 
 theme:
   name: null
-  custom_dir: 'molcrafts/'
+  custom_dir: 'dist/'

@@ -1,17 +1,8 @@
-# Welcome to MkDocs
+# Test page for molcrafts' theme
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+1. create a html template for jinja, and same tsx file for UI.
+2. add page and entry in `rsbuild.config.ts`
+3. use `npm run build` to generate theme
+4. preview with `mkdocs serve`
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+[mkdocs](./unknown.md) is to test 404 not found page.
