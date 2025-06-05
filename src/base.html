@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="{{ config.theme.locale|default('en') }}" >
+<head>
+  {%- block site_meta %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {%- if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}" />{%- endif %}
+    {%- if config.site_author %}<meta name="author" content="{{ config.site_author }}" />{%- endif %}
+    {%- if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{%- endif %}
+    {%- if config.site_favicon %}
+      <link rel="shortcut icon" href="{{ config.site_favicon|url }}" />
+    {%- else %}
+      <link rel="shortcut icon" href="{{ 'img/favicon.ico'|url }}" />
+    {%- endif %}
+  {%- endblock %}
+
+  {%- block htmltitle %}
+    <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+  {%- endblock %}
+
+</head>
+
+<body class="bg-background text-foreground min-h-screen" role="document">
+    <div id="react-root"> </div>
+    <!-- <nav data-toggle="wy-nav-shift" class="w-64 bg-card border-r border-border flex-shrink-0">
+    <div class="overflow-y-auto h-full">
+      <div class="p-4 border-b border-border">
+      {%- block site_name %}
+        {%- if config.theme.logo %}
+          <a href="{{ nav.homepage.url|url }}">
+        {%- else %}
+          <a href="{{ nav.homepage.url|url }}" class="inline-flex items-center gap-2 font-bold"> {{ config.site_name }}
+        {%- endif %}
+        {%- if config.theme.logo %}
+          <img src="{{ config.theme.logo|url }}" class="logo" alt="{% trans %}Logo{% endtrans %}"/>
+        {%- endif %}
+        </a>
+      {%- endblock %}
+      {%- if config.extra.version %}
+        <div class="text-xs text-muted-foreground mt-2">
+          {{ config.extra.version }}
+        </div>
+      {%- endif %}
+      {%- block search_button %}
+        <div id="search-button"></div>
+      {%- endblock %}
+      </div>
+
+      <div class="mt-4 space-y-2" data-spy="affix" role="navigation" aria-label="{% trans %}Navigation menu{% endtrans %}">
+        {%- block site_nav %}
+          {%- set navlevel = 1 %}
+          {%- for nav_item in nav %}
+            {%- if nav_item.is_section %}
+              {%- if nav_item.is_page %}
+                <ul><li{% if nav_item == page %} class="bg-accent text-accent-foreground rounded"{% endif %}>
+                    <a href="{% if nav_item == page %}#{% else %}{{ nav_item.url|url }}{% endif %}" style="padding: 0; font-size: inherit; line-height: inherit">
+              {%- endif %}
+              <p class="caption"><span class="caption-text">{{ nav_item.title }}</span></p>
+              {%- if nav_item.is_page %}
+                    </a>
+                </li></ul>
+              {%- endif %}
+              <ul{% if nav_item.active %} class="bg-accent text-accent-foreground rounded"{% endif %}>
+                {%- for nav_item in nav_item.children %}
+                  <li class="pl-{{ navlevel + 2 }}{% if nav_item.active %} bg-accent text-accent-foreground rounded{% endif %}">
+                    {%- include 'nav.html' %}
+                  </li>
+                {%- endfor %}
+              </ul>
+            {%- elif config.theme.include_homepage_in_sidebar or (not nav_item == nav.homepage) %}
+              <ul{% if nav_item.active %} class="bg-accent text-accent-foreground rounded"{% endif %}>
+                <li class="pl-{{ navlevel + 2 }}{% if nav_item.active %} bg-accent text-accent-foreground rounded{% endif %}">
+                  {%- include 'nav.html' %}
+                </li>
+              </ul>
+            {%- endif %}
+          {%- endfor %}
+        {%- endblock %}
+      </div>
+    </div>
+    </nav> -->
+
+    {#- MAIN CONTENT #}
+
+    <!-- <section data-toggle="wy-nav-shift" class="flex-1 flex flex-col">
+
+      {#- MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
+      <nav class="lg:hidden flex items-center justify-between px-4 py-2 border-b border-border bg-background" role="navigation" aria-label="{% trans %}Mobile navigation menu{% endtrans %}">
+        {%- block mobile_nav %}
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="{{ nav.homepage.url|url }}">{{ config.site_name }}</a>
+        {% endblock %}
+      </nav>
+
+      {#- PAGE CONTENT #}
+      <div class="flex-1 p-8">
+        <div class="prose max-w-none">
+          <div id="breadcrumbs" ></div>
+          <div role="main" class="w-full" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section mb-8" itemprop="articleBody">
+              {% block content %}
+                {{ page.content }}
+              {% endblock %}
+            </div>
+          </div>
+          {%- block footer %}
+            <div id="footer"></div>
+          {% endblock %}
+        </div>
+      </div>
+
+    </section> -->
+
+  </div>
+
+  <div id="version"></div>
+
+</body>
+</html>
+{% if page and page.is_homepage %}
+<!--
+MkDocs version : {{ mkdocs_version }}
+Build Date UTC : {{ build_date_utc }}
+-->
+{% endif %}

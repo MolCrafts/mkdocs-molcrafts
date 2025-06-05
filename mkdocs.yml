@@ -1,5 +1,5 @@
-site_name: My Docs
+site_name: Molcrafts theme
 
 theme:
   name: null
-  custom_dir: 'molcrafts/'
+  custom_dir: 'dist/'
