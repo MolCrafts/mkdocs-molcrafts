@@ -2,6 +2,7 @@ import favicon from "@/assets/favicon.ico";
 import { Navbar } from "@/components/navbar";
 import { Helmet } from "react-helmet";
 import "./App.css";
+import cfg from "../components/theme-config";
 
 const DefaultFavIcon = () => {
   return (

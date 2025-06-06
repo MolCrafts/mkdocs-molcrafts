@@ -7,6 +7,7 @@ import {
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -17,6 +18,8 @@ import { buttonVariants } from "./ui/button";
 import { Menu } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 import { LogoIcon } from "./Icons.tsx";
+import { themeConfig } from "./theme-config";
+
 
 interface RouteProps {
   href: string;
@@ -43,6 +46,9 @@ const routeList: RouteProps[] = [
 ];
 
 export const Navbar = () => {
+
+  const site_name = themeConfig.site_name;
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
@@ -79,8 +85,9 @@ export const Navbar = () => {
               <SheetContent side={"left"}>
                 <SheetHeader>
                   <SheetTitle className="font-bold text-xl">
-                    Shadcn/React
+                    {site_name}
                   </SheetTitle>
+                  <SheetDescription></SheetDescription>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
                   {routeList.map(({ href, label }: RouteProps) => (
