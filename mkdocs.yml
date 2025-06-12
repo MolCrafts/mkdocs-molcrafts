@@ -1,5 +1,15 @@
-site_name: My Docs
+site_name: Molcrafts theme
 
 theme:
-  name: null
+  name: mkdocs
   custom_dir: 'dist/'
+
+theme_color: purple
+
+nav:
+  - Home: index.md
+  - About: about.md
+  - Contact: contact.md
+
+watch:
+  - dist/

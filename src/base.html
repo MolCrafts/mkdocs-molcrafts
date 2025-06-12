@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="{{ config.theme.locale|default('en') }}" >
+<head>
+  {%- block site_meta %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {%- if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}" />{%- endif %}
+    {%- if config.site_author %}<meta name="author" content="{{ config.site_author }}" />{%- endif %}
+    {%- if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{%- endif %}
+    {%- if config.site_favicon %}
+      <link rel="shortcut icon" href="{{ config.site_favicon|url }}" />
+    {%- else %}
+      <link rel="shortcut icon" href="{{ 'img/favicon.ico'|url }}" />
+    {%- endif %}
+  {%- endblock %}
+
+  {%- block htmltitle %}
+    <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+  {%- endblock %}
+
+</head>
+
+<body class="bg-background text-foreground min-h-screen" role="document">
+
+    {% macro toc_to_json(toc) %}
+        [
+        {%- for item in toc %}
+            {
+                "id": {{ item.id | tojson }},
+                "title": {{ item.title | tojson }},
+                "children": {{ toc_to_json(item.children) }}
+            }{%- if not loop.last %},{% endif %}
+        {%- endfor %}
+        ]
+    {% endmacro %}
+
+    {# Convert nav object to a serialisable structure #}
+    {% macro nav_to_json(nav) %}
+        [
+        {%- for item in nav %}
+            {
+                "title": {{ item.title | tojson }},
+                {%- if item.is_page or item.is_link %}
+                "url": {{ item.url | tojson }}
+                {%- endif %}
+                {%- if item.children %}
+                {%- if item.is_section %}, "children": {{ nav_to_json(item.children) }}{% endif %}
+                {%- endif %}
+            }{%- if not loop.last %},{% endif %}
+        {%- endfor %}
+        ]
+    {% endmacro %}
+
+    {%- block content %}
+
+    {%- endblock %}
+    <script id="mkdocs-config" type="application/json">
+      {
+        "site_name": {{ config.site_name|tojson }},
+        "nav": {{ nav_to_json(nav) }},
+        "theme_color": {{ config.theme_color|tojson }}
+      }
+    </script>
+    <script id="mkdocs-page" type="application/json">
+      {"title": {{ page.title|tojson if page else 'null' }}}
+    </script>
+    <script id="mkdocs-toc" type="application/json">{{ page and toc_to_json(page.toc) or '[]' }}</script>
+    <div id="react-root"></div>
+</body>
+</html>
+{% if page and page.is_homepage %}
+<!--
+MkDocs version : {{ mkdocs_version }}
+Build Date UTC : {{ build_date_utc }}
+-->
+{% endif %}

@@ -1,4 +1,4 @@
-# frontend/.gitignore
+# Frontend 
 node_modules/
 
 # Byte-compiled / optimized / DLL files
@@ -175,3 +175,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+!lib/
+!lib/utils.ts
